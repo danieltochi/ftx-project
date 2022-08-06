@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <style>
+            body{
+                background:linear-gradient(to right, #11044d,#11044d);
+            }
+            #status{
+                border: 3px solid black;
+                border-radius: 60px;
+                padding: 40px;
+                background:linear-gradient(to right, #11044d,#333);
+            }
+            #myProgress {
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.63)
+            }
+            .myBar {
+                width: 1%;
+                height: 70px;
+                background-color: green;
+                border-radius: 60px;
+                visibility: hidden;
+             }
+             .myBa {
+                
+                background-color: rgba(0, 128, 0, 0.048);
+                
+                
+             }
+            .hed {
+                text-align: center;
+                text-size-adjust:70px;
+                margin-top: 0;
+                padding: 40px;
+               }
+            .open-level{
+                visibility: visible;
+               }
+               .level{
+                color: #333;
+                    text-align: center;
+                    font-style: italic;
+                    font-size: 20px;
+                   }
+                   container{
+            background:rgb(15,15,15);
+           
+            border-radius:10px;
+            display:flex;
+            justify-content:center;
+            flex-direction:column;
+            color:#fff;
+            padding:15px;
+        }
+        button{
+            width:102%;
+            height:50px;
+            border-radius:10px;
+            margin:0.2em 0;
+            transform:translate(-1%);
+            cursor:pointer;
+            color:#fff;
+            background:linear-gradient(to right, #333,black);
+            transition:all 0.5s;
+        }
+        button:hover{
+            transform:translate(-1%,5%);
+            box-shadow:0 0 10px black;
+        }
+        #message{
+            float: right;
+            border-radius:10px;
+            margin:0.2em 0;
+            transform:translate(-1%);
+            cursor:pointer;
+            color:#fff;
+            background:linear-gradient(to right, #333,black);
+            transition:all 0.5s;
+        }
+                
+        </style>
+    </head>
+    <body>
+        <h1 class="hed">Package active bar</h1>
+        <h1>Diamound Package...</h1>
+       
+        <div id="status">
+            <div class="myBa">
+                <div id="myBar" class="myBar"></div>
+            </div>
+    </div>
+        <br>
+        <p id="message"></p>
+        <button onclick="move()">Withdral</button>
+
+
+        <!--js-->
+        <script>
+            var i = 0;
+   function move() {
+    var ele = document.getElementById("myBar");
+                myBar.classList.add("open-level");
+      if (i === 0) {
+        i = 1;
+        var elem = document.getElementById("myBar");
+        var width =1;
+        var id = setInterval(frame, 100);
+        function frame() {
+            
+            if (width >= 100) {
+                clearInterval(id);
+                i = 0;
+                document.getElementById('message').innerHTML = "GOD DID WITDRAWL"
+                
+                document.getElementById("mainBal").innerHTML = 10;
+            }
+            else {
+                width++;
+                elem.style.width = width + "%";
+        
+                }
+          }
+         
+        }
+        
+              
+     }
+          
+    </script>
+  </body>
+</html>

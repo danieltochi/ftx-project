@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <headd>
+        <title></title>
+    </headd>
+    <body>
+        <form>
+            <label for="username" >username</label>
+            <input type="text" id="username" name="name">
+            <label for="email" >email</label>
+            <input type="text" id="email" name="email">
+            <label for="profile_picture" >profile_picture</label>
+            <input type="image" id="profile_picture" name="imageUrl">
+             <input type="submit" value="submit" onclick="">
+        </form>
+        <script type="module">
+            import { initializeApp } from "firebase/app";
+import { getDatabase, ref, set, onValue,child, get, push, update } from "firebase/database";
+
+import { getAuth } from "firebase/auth";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBDw_OcHDfFGn6U9wjYZbhiYOUUzcvEhfg",
+    authDomain: "project1-3c1ee.firebaseapp.com",
+    projectId: "project1-3c1ee",
+    storageBucket: "project1-3c1ee.appspot.com",
+    messagingSenderId: "238265436757",
+    appId: "1:238265436757:web:e7f51958f937dd1f0be2dc"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+
+
+function writeUserData(userId, name, email, imageUrl) {
+  const db = getDatabase();
+  set(ref(db, 'users/' + userId), {
+    username: name,
+    email: email,
+    profile_picture : imageUrl
+  });
+}
+
+const db = getDatabase();
+const starCountRef = ref(db, 'posts/' + postId + '/starCount');
+onValue(starCountRef, (snapshot) => {
+  const data = snapshot.val();
+  updateStarCount(postElement, data);
+});
+const dbRef = ref(getDatabase());
+get(child(dbRef, `users/${userId}`)).then((snapshot) => {
+  if (snapshot.exists()) {
+    console.log(snapshot.val());
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
+
+const auth = getAuth();
+
+const userId = auth.currentUser.uid;
+return onValue(ref(db, '/users/' + userId), (snapshot) => {
+  const username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+  // ...
+}, {
+  onlyOnce: true
+});
+
+import { getDatabase, ref, child, push, update } from "firebase/database";
+
+function writeNewPost(uid, username, picture, title, body) {
+  const db = getDatabase();
+
+  // A post entry.
+  const postData = {
+    author: username,
+    uid: uid,
+    body: body,
+    title: title,
+    starCount: 0,
+    authorPic: picture
+  };
+
+  // Get a key for a new Post.
+  const newPostKey = push(child(ref(db), 'posts')).key;
+
+  // Write the new post's data simultaneously in the posts list and the user's post list.
+  const updates = {};
+  updates['/posts/' + newPostKey] = postData;
+  updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+
+  return update(ref(db), updates);
+}
+
+import { getDatabase, ref, set } from "firebase/database";
+
+set(ref(db, 'users/' + userId), {
+  username: name,
+  email: email,
+  profile_picture : imageUrl
+})
+.then(() => {
+  // Data saved successfully!
+})
+.catch((error) => {
+  // The write failed...
+});
+
+import { getDatabase, ref, runTransaction } from "firebase/database";
+
+function toggleStar(uid) {
+  const db = getDatabase();
+  const postRef = ref(db, '/posts/foo-bar-123');
+
+  runTransaction(postRef, (post) => {
+    if (post) {
+      if (post.stars && post.stars[uid]) {
+        post.starCount--;
+        post.stars[uid] = null;
+      } else {
+        post.starCount++;
+        if (!post.stars) {
+          post.stars = {};
+        }
+        post.stars[uid] = true;
+      }
+    }
+    return post;
+  });
+}
+        </script>
+    </body>
+</html>

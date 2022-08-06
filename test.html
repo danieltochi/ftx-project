@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="dist/css/style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+            <title>login/Sgin-in page</title>
+        </head>
+        <title>login/Sgin-in page</title>
+        
+       <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "poppins", sans-serif;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgb(1, 1, 19);
+        }
+        .container{
+            background:rgb(15,15,15);
+            width:500px;
+            height:590px;
+            border-radius:20px;
+            display:flex;
+            justify-content:center;
+            flex-direction:column;
+            color:#fff;
+            padding:2em;
+        }
+        .heading{
+            font-size:2em;
+            margin-bottom:0.5em;
+        }
+        .box{
+            margin:0.2em 0
+        }
+        .box1{
+            margin:0.2em 0
+        }
+        .container .box p{
+            color:rgba(255,255,255,0.701);
+        }
+        .container .box1 p{
+            color:rgba(255,255,255,0.701);
+        }
+        .container .box div{
+            position:relative;
+            width:100%;
+            height:40px;
+            margin:0.2em 0;
+        }
+        .container .box1 div{
+            position:relative;
+            width:100%;
+            height:40px;
+            margin:0.2em 0;
+        }
+        .container .box input{
+            position:absolute;
+            width:100%;
+            height:100%;
+            background:rgba(19,19,19);
+            color:#fff;
+            border:none;
+            outline:none;
+            padding-left:0.8em;
+            border-radius:10px;
+            transition:all 0.5s;
+        }
+        .container .box1 input{
+           position: absolute;
+            width:70%;
+            height:100%;
+            background:rgba(19,19,19);
+            color:#fff;
+            border:none;
+            outline:none;
+            padding-left:0.8em;
+            border-radius:10px;
+            transition:all 0.5s;
+        }
+        .box2{
+           position: absolute;
+            width:70%;
+            height:100%;
+            background:rgba(19,19,19);
+            color:#fff;
+            border:none;
+            outline:none;
+            padding-left:0.8em;
+            border-radius:10px;
+            transition:all 0.5s;
+        }
+        .container .box input:focus::placeholder{
+            color:#fff;
+        }
+        .container .box div::before{
+            content:'';
+            position:absolute;
+            top:50%;left:50%;
+            transform:translate(-50%,-50%);width:102%;
+            height:105%;
+            border-radius:10px;
+            background:linear-gradient(to right, #11044d,#11044d);
+        }
+        .loginBtn{
+            width:102%;
+            height:40px;
+            border-radius:10px;
+            margin:0.2em 0;
+            transform:translate(-1%);
+            cursor:pointer;
+            color:#fff;
+            background:linear-gradient(to right, #11044d,#11044d);
+            transition:all 0.5s;
+        }
+        .loginBtn:hover{
+            transform:translate(-1%,5%);
+            box-shadow:0 0 10px black;
+        }
+        .text{
+            font-size:0.8em;
+            margin-top:0.5em;
+            text-align:center;
+            color:rgba(255,255,255,0.625);
+        }
+        .text a{
+            color:rgba(255,255,255,0.911);
+        }
+        /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+ @media (max-width: 800px) {
+   .row {
+     flex-direction: column-reverse;
+   }
+   .col-25 {
+     margin-bottom: 20px;
+   }
+ }
+        </style>
+        
+    </head>
+    <body>
+        <div class="container">
+            <p class="heading">Login In</p>
+            <form id="form">
+            <div class="box">
+                <p>First name</p>
+                <div><input type="text" id="fname" placeholder="Enter first name" autocomplete="on"> </div>
+            </div>
+            <div class="box">
+                <p>Last name</p>
+                <div> <input type="text" id="lname" autocomplete="on" placeholder="Enter your last name" > </div>
+            </div>
+            <div class="box">
+                <p>Email</p>
+                <div> <input type="text" id="email" autocomplete="on" placeholder="Enter your email" > </div>
+            </div>
+            <div class="box">
+                <p>Password</p>
+                <div> <input type="password" id="password" placeholder="Enter your password" > </div>
+            </div>
+            <p class="text"><input type="checkbox" id="checkBox" > I agree to the <a href="#">Terms and  Condition</a></p>
+
+            <p class="text">Our <a href="#">Privacy Policy</a></p>
+            <a href='#'>
+           <button type="submit" onclick="UserRegister()" id="btn">sign up</button>
+        </form>
+            <p class="text">Aleady have an account? <a href="C:\Users\Daniel\Documents\project\login.html">Login</a></p>
+        </div>
+ 
+    
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
+        import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-database.js";
+        
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCScyriOOhq0g9-zceXRAx4oOo8x8bOzgk",
+          authDomain: "flx-trade.firebaseapp.com",
+          databaseURL: "https://flx-trade-default-rtdb.firebaseio.com",
+          projectId: "flx-trade",
+          storageBucket: "flx-trade.appspot.com",
+          messagingSenderId: "662515131015",
+          appId: "1:662515131015:web:ffdaaebaf89889b01c8e22"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        
+
+
+        var datab = firebase.database().ref('data');
+        function UserRegister(){
+            var fname =document.getElementById('fname').value;
+            var lname =document.getElementById('lname').value;
+            var email =document.getElementById('email').value;
+            var password =document.getElementById('password').value;
+            firebase.auth().createUserWithEmailAndPassword(fname,lname, email, password).then(function(){
+
+            }).catch(function(error){
+                var errorcode = error.code;
+                var errormsg = error.message;
+            });
+        }
+        const auth = firebase.auth();
+        function Signin(){
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            const promise = auth.signinwithEmailAndPassword(email.password);
+            promise.catch(e => alert(e.msg));
+            window.open("https://www.goggle.com","_self");
+        }
+        document.getElementById(form).addEventListener('submit',(e) =>{
+            e.preventDefault();
+            var userinfo = data.push();
+            userinfo.set({
+                fname: getid('fname'),
+                lname: getid('lname'),
+                email: getid('email'),
+                password: getid('password'),
+            });
+            alert("Sucessfully Sigined Up");
+            console.log("sent");
+            document.getElementById('form').reset();
+        });
+        function getId(id){
+            return document.getElementById(id).value;
+        }
+
+           
+      </script>
+      </body>
+</html>
+
